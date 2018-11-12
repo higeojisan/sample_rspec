@@ -1,6 +1,8 @@
 require 'calc'
 
-RSpec.describe "A calc" do
+# トップレベルのdescribeはテスト対象のクラスを書いたりする
+RSpec.describe Calc do
+#RSpec.describe "A calc" do
 
   # テストごとに実行
   before(:example) do
@@ -11,14 +13,23 @@ RSpec.describe "A calc" do
   #  全部のテストの最初に一度だけ
   #end
 
-  it "given 2 and 3, returns 5" do
-    #calc = Calc.new
-    expect(@calc.add(2,3)).to eq(5)
+  # describeは入れ子に出来る
+  # テストのグループ分けに使える
+  # contextでも同じ
+  # context => 状況
+  # describe =>　物
+  context "when normal mode" do
+    it "given 2 and 3, returns 5" do
+      #calc = Calc.new
+      expect(@calc.add(2,3)).to eq(5)
+    end
   end
 
-  it "given 5 and 5, returns 10" do
-    #calc = Calc.new
-    expect(@calc.add(5, 5)).to eq(10)
+  context "when advance mode" do
+    it "given 5 and 5, returns 10" do
+      #calc = Calc.new
+      expect(@calc.add(5, 5)).to eq(10)
+    end
   end
 
 end
