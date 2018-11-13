@@ -1,5 +1,13 @@
 require 'calc'
 
+# exampleを共通化したい場合に使う
+RSpec.shared_examples "basic functions" do
+  it "can add"
+  it "can subtract"
+  it "can multiply"
+  it "can divide"
+end
+
 # トップレベルのdescribeはテスト対象のクラスを書いたりする
 # この場合、Calcクラスのインスタンスをsubjectで代用することが可能
 RSpec.describe Calc do
@@ -117,11 +125,27 @@ RSpec.describe Calc do
   # message expectation
   # 呼び出されなかったらテストが失敗する
   # ある処理の前に確実にある処理が走っていることを保証したい場合に使う
-  it {
-    logger = double('logger')
-    expect(logger).to receive(:log)
-    calc = Calc.new(logger)
-    expect(calc.add(5, 2)).to eq(7)
-  }
+  #it {
+  #  logger = double('logger')
+  #  expect(logger).to receive(:log)
+  #  calc = Calc.new(logger)
+  #  expect(calc.add(5, 2)).to eq(7)
+  #}
 
+  context "normal mode" do
+    include_examples "basic functions"
+    #it "can add"
+    #it "can subtract"
+    #it "can multiply"
+    #it "can divide"
+  end
+
+  context "expert mode" do
+    include_examples "basic functions"
+    #it "can add"
+    #it "can subtract"
+    #it "can multiply"
+    #it "can divide"
+    it "can draw graph"
+  end
 end
