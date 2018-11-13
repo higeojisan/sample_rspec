@@ -6,8 +6,8 @@ class Calc
     @tax = 0
   end
 
-  def add(a, b)
-    a + b
+  def add(a, b, name)
+    (a + b).to_s + " by #{name}"
   end
 
   def price(price)

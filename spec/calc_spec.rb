@@ -4,6 +4,7 @@ require 'calc'
 # この場合、Calcクラスのインスタンスをsubjectで代用することが可能
 RSpec.describe Calc do
 #RSpec.describe "A calc" do
+=begin
 
   # 以下のように記述するとCalcクラスのインスタンスをローカル変数calcとして使える
   # subjectだとテストが長くなった場合わかりづらいのでこちらが推奨
@@ -101,5 +102,15 @@ RSpec.describe Calc do
     # ビルトインマッチャーの一覧
     # https://relishapp.com/rspec/rspec-expectations/v/3-8/docs/built-in-matchers
   end
+=end
+  # test double: 代役オブジェクト
+  # method stub
+  it {
+    user = double('user')
+    allow(user).to receive(:name).and_return('taguchi')
+    # user.name -> 'taguchi'を返す
+    new_calc = Calc.new
+    expect(new_calc.add(5, 2, user.name)).to eq('7 by taguchi')
+  }
 
 end
