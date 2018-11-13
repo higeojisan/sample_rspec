@@ -1,13 +1,16 @@
 class Calc
 
-  attr_accessor :tax
-
-  def initialize
-    @tax = 0
+  def initialize(logger)
+    @logger = logger
   end
 
-  def add(a, b, name)
-    (a + b).to_s + " by #{name}"
+  #def add(a, b, name)
+  #  (a + b).to_s + " by #{name}"
+  #end
+
+  def add(a, b)
+    @logger.log
+    a + b
   end
 
   def price(price)

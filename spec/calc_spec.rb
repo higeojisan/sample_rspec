@@ -105,12 +105,23 @@ RSpec.describe Calc do
 =end
   # test double: 代役オブジェクト
   # method stub
+  #it {
+  #  user = double('user')
+  #  allow(user).to receive(:name).and_return('taguchi')
+  #  # user.name -> 'taguchi'を返す
+  #  new_calc = Calc.new
+  #  expect(new_calc.add(5, 2, user.name)).to eq('7 by taguchi')
+  #}
+
+  # test double: 代役オブジェクト
+  # message expectation
+  # 呼び出されなかったらテストが失敗する
+  # ある処理の前に確実にある処理が走っていることを保証したい場合に使う
   it {
-    user = double('user')
-    allow(user).to receive(:name).and_return('taguchi')
-    # user.name -> 'taguchi'を返す
-    new_calc = Calc.new
-    expect(new_calc.add(5, 2, user.name)).to eq('7 by taguchi')
+    logger = double('logger')
+    expect(logger).to receive(:log)
+    calc = Calc.new(logger)
+    expect(calc.add(5, 2)).to eq(7)
   }
 
 end
