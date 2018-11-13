@@ -9,6 +9,17 @@ RSpec.describe Calc do
   # subjectだとテストが長くなった場合わかりづらいのでこちらが推奨
   subject(:calc) { Calc.new }
 
+  # 操作の主対象ではないが変数で管理したい場合letを使う
+  context "tax 5%" do
+    let(:tax) { 0.05 }
+    it { expect(calc.price(100, tax)).to eq(105) }
+  end
+
+  context "tax 8%" do
+    let(:tax) { 0.08 }
+    it { expect(calc.price(100, tax)).to eq(108) }
+  end
+
 
   # テストごとに実行
   # ただし、なるべくexampleの中ではインスタンス変数を使わない方がいいとされている
