@@ -1,10 +1,17 @@
 require 'calc'
 
 # トップレベルのdescribeはテスト対象のクラスを書いたりする
+# この場合、Calcクラスのインスタンスをsubjectで代用することが可能
 RSpec.describe Calc do
 #RSpec.describe "A calc" do
 
+  # 以下のように記述するとCalcクラスのインスタンスをローカル変数calcとして使える
+  # subjectだとテストが長くなった場合わかりづらいのでこちらが推奨
+  subject(:calc) { Calc.new }
+
+
   # テストごとに実行
+  # ただし、なるべくexampleの中ではインスタンス変数を使わない方がいいとされている
   before(:example) do
     @calc = Calc.new
   end
@@ -21,7 +28,7 @@ RSpec.describe Calc do
   context "when normal mode" do
     it "given 2 and 3, returns 5" do
       #calc = Calc.new
-      expect(@calc.add(2,3)).to eq(5)
+      expect(subject.add(2,3)).to eq(5)
     end
   end
 
@@ -34,7 +41,7 @@ RSpec.describe Calc do
     #}
     it "given 5 and 5, returns 10" do
       #calc = Calc.new
-      expect(@calc.add(5, 5)).to eq(10)
+      expect(calc.add(5, 5)).to eq(10)
     end
 
     it "given 5 and 5, not returns 5" do
