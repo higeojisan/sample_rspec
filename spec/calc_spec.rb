@@ -9,16 +9,24 @@ RSpec.describe Calc do
   # subjectだとテストが長くなった場合わかりづらいのでこちらが推奨
   subject(:calc) { Calc.new }
 
+  # let
   # 操作の主対象ではないが変数で管理したい場合letを使う
+  # 1. exampleごとに結果がキャッシュされる
+  # 2. 遅延評価
+  # let!
+  # exampleごとに必ず実行させたい場合に使う
   context "tax 5%" do
-    let(:tax) { 0.05 }
-    it { expect(calc.price(100, tax)).to eq(105) }
+    let!(:tax) {
+      calc.tax = 0.05
+    }
+    it { expect(tax).to eq(0.05) }
+    it { expect(calc.price(100)).to eq(105) }
   end
 
-  context "tax 8%" do
-    let(:tax) { 0.08 }
-    it { expect(calc.price(100, tax)).to eq(108) }
-  end
+  #context "tax 8%" do
+  #  let(:tax) { 0.08 }
+  #  it { expect(calc.price(100, tax)).to eq(108) }
+  #end
 
 
   # テストごとに実行
